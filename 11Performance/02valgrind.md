@@ -51,26 +51,33 @@ git clone https://github.com/UCL-RITS/research-computing-with-cpp
 Creating a virtual machine is optional on Linux, and necessary on Windows and Mac OS/X
 
 ```
-> docker-machine create cpp_course  \
+> docker-machine create cppcourse  \
            --driver virtualbox      \
            --virtualbox-memory 4000 \
            --virtualbox-cpu-count 2
-> eval $(docker-machine env cpp_course)
 ```
 
-The last lines lets docker know on which VM it should create containers.
+The output from the last command will tell you what expression to run to tell
+docker what virtual machine to use.
+
+On Linux and Mac, it will be:
+
+```
+> eval $(docker-machine env cppcourse)
+```
+
 
 Then ssh into the machine and look for your home directory:
 
 ```
-> docker-machine ssh cpp_course
+> docker-machine ssh cppcourse
 > pwd
 # Mac users
 > ls /Users/
 # Linux users
-> ls /home
+> ls /hosthome
 # Windows users
-# uhm, no idea :(, look around and let me know!
+> ls /c/Users/
 ```
 
 Then, create a Dockerfile specifying the container we want:
@@ -127,7 +134,7 @@ It has memory leaks and bugs. Investigate and correct using valgrind:
     -w /path/to/source/on/container                       \
     course_container                                      \
     valgrind -v --leak-check=full --show-leak-kinds=all   \
-                --track-origin=yes ./awful
+                --track-origins=yes ./awful
 ```
 
 ## Running valgrind on program called `less_bad`

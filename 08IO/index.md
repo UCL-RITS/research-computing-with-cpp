@@ -1,5 +1,5 @@
 ---
-title: MPI File I/O
+title: Not covered (MPI File I/O)
 ---
 
 ## Parallel Input and Output
